@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <!--Font Awsome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container text-center mb-5">
+        <h1 class="text-black mt-5 mb-5">Store Management System</h1>
+
+        <button type="button" onclick="setAdd()" class="btn btn-outline-primary w-25" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">
+            Add Product
+        </button>
+        <button type="button" onclick="deleteAll()" class="btn btn-outline-danger w-25">Delete All Products</button>
+
+        <!-- Modal Form-->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 " id="staticBackdropLabel">Add Product</h1>
+                        <h1 class="modal-title fs-5 d-none" id="staticBackdropLabel2">Update Product</h1>
+                        <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-start">
+                            <input oninput="validateInputs(this)" type="text" id="productName" class="form-control mt-2"
+                                placeholder="Product Name" />
+                            <div class="alert alert-danger mt-2 d-none">
+                                Product Name MUST start with a capital letter and contain at least 3 letters
+                            </div>
+                            <input oninput="validateInputs(this)" type="number" id="productPrice"
+                                class="form-control mt-2" placeholder="Product Price" />
+                            <div class="alert alert-danger mt-2 d-none">
+                                Price range from (1000) to (99999)
+                            </div>
+
+                        <input oninput="validateInputs(this)" type="text" id="productCategory" class="form-control mt-2"
+                            list="Category" placeholder="Product Category" />
+                        <div class="alert alert-danger mt-2 d-none">
+                            Please select from (Mobile-Tv-Laptop-Smart Watch)
+                        </div>
+
+                        <datalist id="Category">
+                            <option value="Mobile"></option>
+                            <option value="TV"></option>
+                            <option value="Laptop"></option>
+                            <option value="Smart Watch"></option>
+                        </datalist>
+
+                        <textarea oninput="validateInputs(this)" class="form-control mt-2" id="productDescription"
+                            placeholder="Product Description"></textarea>
+                        <div class="alert alert-danger mt-2 d-none">
+                            Please enter a Description of (4-300) characters
+                        </div>
+                        <label for="productImage">Product Image</label>
+                        <input type="file" accept="Image/*" id="productImage" class="form-control mt-2"
+                            placeholder="Product Image" />
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="resetFunction()" type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="button" id="addBtn" class="btn btn-outline-primary" onclick="addProduct()" disabled>
+                            Add Product
+                        </button>
+                        <button id="updateBtn" type="button" class="btn btn-outline-warning d-none"
+                            data-bs-dismiss="modal" onclick="updateProduct()" disabled>
+                            Update Product
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row d-flex justify-content-center gy-3">
+            <div class="col-md-6">
+                <input type="text" id="searchByName" class="m-auto form-control" placeholder="Search Product By Name"
+                    oninput="searchProduct(this)" />
+
+            </div>
+            <div class="col-md-6">
+                <input type="text" id="searchByCategory" class="m-auto form-control"
+                    placeholder="Search Product By Category" oninput="searchProduct(this)" />
+            </div>
+        </div>
+
+        <div id="no-match" class="alert alert-danger mt-4 d-none">
+            There is not match products
+        </div>
+
+        <div class="row" id="productsRow">
+
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
